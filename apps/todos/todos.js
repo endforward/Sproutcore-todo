@@ -26,3 +26,18 @@ Todos.todoListController = SC.ArrayController.create({
     this.pushObject(todo);
   }
 });
+
+Todos.CreateTodoView = SC.TemplateView.create(SC.TextFieldSupport, {
+  insertNewline: function() {
+    var value = this.get('value');
+
+    if(value) {
+      Todos.todoListController.createTodo(value);
+      this.set('value', '');
+    }
+  }
+});
+
+Todos.todoListView = SC.TemplateCollectionView.create({
+  contentBinding: 'Todos.todoListController'
+});
